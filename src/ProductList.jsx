@@ -1,13 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 import Product from './Product';
 
 const ProductList = () => {
-  // Initialize some sample product data
-  const products = [
-    { id: 1, name: 'Product 1', price: 19.99, category: 'Electronics' },
-    { id: 2, name: 'Product 2', price: 29.99, category: 'Clothing' },
-    { id: 3, name: 'Product 3', price: 9.99, category: 'Groceries' },
-  ];
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await axios.get('http://localhost:3001/products'); // Assuming the endpoint is '/products'
+      setProducts(response.data);
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="product-list">

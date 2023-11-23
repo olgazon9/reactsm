@@ -7,6 +7,7 @@ import ProductList from './ProductList';
 import About from './About';
 import History from './History';
 import Future from './Future';
+import NotFoundPage from './NotFoundPage'; // Your 404 component
 
 const AppWithRouting = () => {
   return (
@@ -20,9 +21,11 @@ const AppWithRouting = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/about/history" element={<History />} />
-          <Route path="/about/future" element={<Future />} />
+          <Route path="/about" element={<About />}>
+            <Route path="history" element={<History />} />
+            <Route path="future" element={<Future />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} /> // Wildcard route for 404
         </Routes>
       </div>
     </Router>
